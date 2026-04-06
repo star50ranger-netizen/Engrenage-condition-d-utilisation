@@ -34,14 +34,17 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 15px;
+      gap: 20px; /* un peu plus d'espace entre logo et texte */
     }
+
     header img {
-      width: 48px;
-      height: 48px;
-      filter: drop-shadow(0 0 4px #82aaff);
+      width: 64px; /* augmenter la taille du logo */
+      height: 64px;
+      filter: drop-shadow(0 0 6px #82aaff);
       animation: spin 10s linear infinite;
+      object-fit: contain; /* pour garder les proportions */
     }
+
     header p {
       font-size: 1.2rem;
       color: #a0a0a0;
