@@ -1,13 +1,410 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Conditions d'Utilisation - Engrenage Bot</title>
+  
+  <!-- Polices Google : Inter pour un design sobre et classique -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Variables de thème */
+    :root {
+      --bg-color: #121212;
+      --surface-color: #1a1a1a;
+      --surface-hover: #242424;
+      --primary-color: #ffffff;
+      --primary-hover: #e5e5e5;
+      --text-main: #ededed;
+      --text-muted: #a3a3a3;
+      --border-color: #333333;
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    /* Navigation & Switcher de langue */
+    nav {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      justify-content: flex-end;
+      padding: 20px 0;
+    }
+
+    .lang-switch {
+      display: flex;
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      border-radius: 30px;
+      overflow: hidden;
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 8px 16px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .lang-btn.active {
+      background: var(--primary-color);
+      color: #000;
+    }
+
+    /* En-tête */
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+      margin-top: 20px;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    .logo-container {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    header img {
+      position: relative;
+      z-index: 1;
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+      object-fit: cover;
+      border: 1px solid var(--border-color);
+    }
+
+    header h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: 3rem;
+      color: #ffffff;
+      font-weight: 700;
+      margin-bottom: 5px;
+      letter-spacing: -1px;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .invite-button {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 28px;
+      background-color: var(--primary-color);
+      color: #121212;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: 1px solid var(--primary-color);
+    }
+
+    .invite-button:hover {
+      background-color: transparent;
+      color: var(--primary-color);
+    }
+
+    /* Contenu Principal */
+    main {
+      width: 100%;
+      max-width: 900px;
+      background: var(--surface-color);
+      padding: 40px 50px;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      animation: fadeInUp 0.8s ease-out;
+      margin-bottom: 40px;
+    }
+
+    section {
+      margin-bottom: 40px;
+      transition: opacity 0.3s ease;
+    }
+
+    section:last-child {
+      margin-bottom: 0;
+    }
+
+    h2 {
+      font-family: 'Inter', sans-serif;
+      color: #ffffff;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 15px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    li {
+      position: relative;
+      padding-left: 25px;
+      margin-bottom: 10px;
+      color: var(--text-muted);
+      background: var(--surface-hover);
+      padding: 12px 20px 12px 40px;
+      border-radius: 8px;
+      border-left: 3px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    li:hover {
+      border-left-color: var(--primary-color);
+      background: #2a2a2a;
+    }
+
+    li::before {
+      content: "•";
+      position: absolute;
+      left: 15px;
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    /* Pied de page */
+    footer {
+      width: 100%;
+      max-width: 900px;
+      text-align: center;
+      padding: 30px 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header h1 { font-size: 2.5rem; }
+      main { padding: 30px 20px; }
+      .lang-switch { margin-bottom: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation pour changer de langue -->
+  <nav>
+    <div class="lang-switch">
+      <button class="lang-btn active" onclick="setLanguage('fr')" id="btn-fr">FR</button>
+      <button class="lang-btn" onclick="setLanguage('en')" id="btn-en">EN</button>
+    </div>
+  </nav>
+
+  <!-- En-tête -->
+  <header>
+    <div class="logo-container">
+      <img src="https://i.postimg.cc/zf9PbTWn/Not-Fr-Logo-engrenageom-Server.png" alt="Logo Engrenage" />
+    </div>
+    <h1 id="site-title">Engrenage</h1>
+    <p id="site-subtitle">Conditions d'Utilisation officielles</p>
+    <a id="invite-btn" class="invite-button" href="https://discord.com/oauth2/authorize?client_id=1488480317030273105&permissions=277025770560&scope=bot+applications.commands" target="_blank" rel="noopener noreferrer">
+      Inviter Engrenage
+    </a>
+  </header>
+
+  <!-- Contenu Principal -->
+  <main id="content-main">
+    <section>
+      <h2 id="sec1-title">Introduction</h2>
+      <p id="sec1-p1">Bienvenue sur les Conditions d'Utilisation du bot Engrenage. En utilisant ce bot, vous acceptez les règles et conditions décrites ci-dessous.</p>
+    </section>
+
+    <section>
+      <h2 id="sec2-title">Utilisation</h2>
+      <p id="sec2-p1">Le bot Engrenage est conçu pour améliorer votre expérience sur Discord. Vous vous engagez à :</p>
+      <ul>
+        <li id="sec2-li1">Utiliser le bot conformément aux règles de Discord et aux lois en vigueur.</li>
+        <li id="sec2-li2">Ne pas utiliser le bot pour des activités malveillantes ou interdites.</li>
+        <li id="sec2-li3">Respecter les autres utilisateurs et ne pas abuser des fonctionnalités du bot.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 id="sec3-title">Collecte de données</h2>
+      <p id="sec3-p1">Le bot peut collecter certaines données nécessaires à son fonctionnement, telles que :</p>
+      <ul>
+        <li id="sec3-li1">Les identifiants Discord pour l'authentification.</li>
+        <li id="sec3-li2">Les messages et interactions pour fournir les fonctionnalités.</li>
+      </ul>
+      <p id="sec3-p2">Ces données sont utilisées uniquement pour améliorer le service et ne sont pas partagées avec des tiers sans consentement.</p>
+    </section>
+
+    <section>
+      <h2 id="sec4-title">Responsabilités</h2>
+      <p id="sec4-p1">Le développeur du bot Engrenage ne peut être tenu responsable des dommages directs ou indirects résultant de l'utilisation du bot. Vous êtes responsable de l'utilisation que vous faites du bot.</p>
+    </section>
+
+    <section>
+      <h2 id="sec5-title">Modifications des conditions</h2>
+      <p id="sec5-p1">Ces Conditions d'Utilisation peuvent être mises à jour à tout moment. La date de la dernière mise à jour est indiquée en bas de cette page.</p>
+    </section>
+
+    <section>
+      <h2 id="sec6-title">Support</h2>
+      <p id="sec6-p1">Pour toute question ou assistance, rejoignez notre serveur support Discord : <a href="https://discord.gg/SS7v4N3S5D" target="_blank" rel="noopener noreferrer">https://discord.gg/SS7v4N3S5D</a></p>
+    </section>
+  </main>
+
+  <!-- Pied de page -->
+  <footer>
+    <p id="footer-text">© 2026 Engrenage Bot. Tous droits réservés. Dernière mise à jour : 6 avril 2026.</p>
+  </footer>
+
+  <!-- Script pour le changement de langue -->
+  <script>
+    const translations = {
+      fr: {
+        "page-title": "Conditions d'Utilisation - Engrenage Bot",
+        "site-subtitle": "Conditions d'Utilisation officielles",
+        "invite-btn": "Inviter Engrenage",
+        
+        "sec1-title": "Introduction",
+        "sec1-p1": "Bienvenue sur les Conditions d'Utilisation du bot Engrenage. En utilisant ce bot, vous acceptez les règles et conditions décrites ci-dessous.",
+        
+        "sec2-title": "Utilisation",
+        "sec2-p1": "Le bot Engrenage est conçu pour améliorer votre expérience sur Discord. Vous vous engagez à :",
+        "sec2-li1": "Utiliser le bot conformément aux règles de Discord et aux lois en vigueur.",
+        "sec2-li2": "Ne pas utiliser le bot pour des activités malveillantes ou interdites.",
+        "sec2-li3": "Respecter les autres utilisateurs et ne pas abuser des fonctionnalités du bot.",
+        
+        "sec3-title": "Collecte de données",
+        "sec3-p1": "Le bot peut collecter certaines données nécessaires à son fonctionnement, telles que :",
+        "sec3-li1": "Les identifiants Discord pour l'authentification.",
+        "sec3-li2": "Les messages et interactions pour fournir les fonctionnalités.",
+        "sec3-p2": "Ces données sont utilisées uniquement pour améliorer le service et ne sont pas partagées avec des tiers sans consentement.",
+        
+        "sec4-title": "Responsabilités",
+        "sec4-p1": "Le développeur du bot Engrenage ne peut être tenu responsable des dommages directs ou indirects résultant de l'utilisation du bot. Vous êtes responsable de l'utilisation que vous faites du bot.",
+        
+        "sec5-title": "Modifications des conditions",
+        "sec5-p1": "Ces Conditions d'Utilisation peuvent être mises à jour à tout moment. La date de la dernière mise à jour est indiquée en bas de cette page.",
+        
+        "sec6-title": "Support",
+        "sec6-p1": "Pour toute question ou assistance, rejoignez notre serveur support Discord : <a href='https://discord.gg/SS7v4N3S5D' target='_blank' rel='noopener noreferrer'>https://discord.gg/SS7v4N3S5D</a>",
+        
+        "footer-text": "© 2026 Engrenage Bot. Tous droits réservés. Dernière mise à jour : 6 avril 2026."
+      },
+      en: {
+        "page-title": "Terms of Service - Engrenage Bot",
+        "site-subtitle": "Official Terms of Service",
+        "invite-btn": "Invite Engrenage",
+        
+        "sec1-title": "Introduction",
+        "sec1-p1": "Welcome to the Engrenage bot Terms of Service. By using this bot, you agree to the rules and conditions described below.",
+        
+        "sec2-title": "Usage",
+        "sec2-p1": "The Engrenage bot is designed to enhance your Discord experience. You agree to:",
+        "sec2-li1": "Use the bot in accordance with Discord's rules and applicable laws.",
+        "sec2-li2": "Not use the bot for malicious or prohibited activities.",
+        "sec2-li3": "Respect other users and not abuse the bot's features.",
+        
+        "sec3-title": "Data Collection",
+        "sec3-p1": "The bot may collect certain data necessary for its operation, such as:",
+        "sec3-li1": "Discord IDs for authentication.",
+        "sec3-li2": "Messages and interactions to provide features.",
+        "sec3-p2": "This data is used solely to improve the service and is not shared with third parties without consent.",
+        
+        "sec4-title": "Liability",
+        "sec4-p1": "The developer of the Engrenage bot cannot be held liable for any direct or indirect damages resulting from the use of the bot. You are responsible for your use of the bot.",
+        
+        "sec5-title": "Changes to Terms",
+        "sec5-p1": "These Terms of Service may be updated at any time. The date of the last update is indicated at the bottom of this page.",
+        
+        "sec6-title": "Support",
+        "sec6-p1": "For any questions or assistance, join our Discord support server: <a href='https://discord.gg/SS7v4N3S5D' target='_blank' rel='noopener noreferrer'>https://discord.gg/SS7v4N3S5D</a>",
+        
+        "footer-text": "© 2026 Engrenage Bot. All rights reserved. Last updated: April 6, 2026."
+      }
+    };
+
+    function setLanguage(lang) {
+      // Mettre à jour la langue de la balise HTML
+      document.documentElement.lang = lang;
+      
+      // Mettre à jour le titre de la page
+      document.title = translations[lang]["page-title"];
+
+      // Mettre à jour tous les éléments de texte
+      for (const key in translations[lang]) {
+        if (key !== "page-title" && document.getElementById(key)) {
+          document.getElementById(key).innerHTML = translations[lang][key];
+        }
+      }
+
+      // Gérer l'état actif des boutons
+      document.getElementById('btn-fr').classList.remove('active');
+      document.getElementById('btn-en').classList.remove('active');
+      document.getElementById('btn-' + lang).classList.add('active');
+
+      // Petit effet visuel lors du changement
+      const mainContent = document.getElementById('content-main');
+      mainContent.style.opacity = 0;
+      setTimeout(() => {
+        mainContent.style.opacity = 1;
+      }, 150);
+    }
+  </script>
+</body>
+</html>
